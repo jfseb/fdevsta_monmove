@@ -1,0 +1,17 @@
+language: node_js
+before_script:
+  - npm i -g typescript typings
+  - typings install
+  - typings install debug
+  - unset FSD_COVERAGE
+  - gulp
+#  - gulp instrument
+node_js:
+ - "6"
+ - "node"
+# - "4"   does not support sourcemaps
+after_script:
+  - npm run instrument
+  - npm run testcov
+  - npm run testcovNoReporter
+  - npm run testcovNoPipe

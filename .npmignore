@@ -1,0 +1,14 @@
+node_modules
+docs
+logs
+js
+testmodel
+testmodel2
+test
+.eslintrc.json
+gen_tsc
+info.lcov
+logs
+gen3
+testmodel/*
+sensitive

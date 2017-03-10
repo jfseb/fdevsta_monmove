@@ -2,11 +2,13 @@
   "name": "fdevsta_monmove",
   "version": "0.1.0",
   "description": "model reading",
-  "main": "gen/index.js",
-  "typings": "gen/index",
+  "main": "js/index.js",
+  "typings": "js/index",
   "scripts": {
-    "build": "gulp",
-    "test": "gulp test"
+    "build": "gulp && tsc",
+    "test": "gulp test",
+    "instrument": "jscoverage js/ gen_cov/ --exclude *.map",
+    "testcov": "export FSD_COVERAGE=1 && nodeunit test/match test/regress test/bot test/exec test/ui test/model test/utils test/graph --reporter=lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -34,5 +36,9 @@
     "gulp-nodeunit": "^0.1.0",
     "gulp-typescript": "^3.1.5",
     "typescript": "^2.2.1"
+  },
+  "dependencies": {
+    "abot_stringdist": "^0.1.0",
+    "abot_utils": "^0.1.0"
   }
 }

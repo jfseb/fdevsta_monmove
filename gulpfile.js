@@ -51,17 +51,17 @@ gulp.task('tsc', function () {
     // .pipe( ... ) // You can use other plugins that also support gulp-sourcemaps
     .pipe(sourcemaps.write('.',{
       sourceRoot : function(file) {
-        file.sourceMap.sources[0] = '/projects/nodejs/botbuilder/fdevstart/src/' + file.sourceMap.sources[0];
+        file.sourceMap.sources[0] = '/projects/nodejs/botbuilder/fdevstar_monmove/src/' + file.sourceMap.sources[0];
         //console.log('here is************* file' + JSON.stringify(file, undefined, 2));
         return 'ABC';
       },
       mapSources: function(src) {
         console.log('here we remap' + src);
-        return '/projects/nodejs/botbuilder/fdevstart/' + src;
+        return '/projects/nodejs/botbuilder/fdevsta_monmove/' + src;
       }}
       )) // ,  { sourceRoot: './' } ))
       // Now the sourcemaps are added to the .js file
-    .pipe(gulp.dest('gen'));
+    .pipe(gulp.dest('js'));
 });
 
 /*
@@ -97,11 +97,10 @@ gulp.task('clean:models', function () {
 gulp.task('clean', ['clean:models']);
 
 
-
 var jsdoc = require('gulp-jsdoc3');
 
 gulp.task('doc', ['test'], function (cb) {
-  gulp.src([srcDir + '/**/*.js', 'README.md', './gen/**/*.js'], { read: false })
+  gulp.src([srcDir + '/**/*.js', 'README.md', './js/**/*.js'], { read: false })
     .pipe(jsdoc(cb));
 });
 

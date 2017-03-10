@@ -33,14 +33,10 @@
         "src/match/ifmatch.ts",
         "src/model/model.ts",
         "src/model/meta.ts",
-        "src/match/indexwords.ts",
         "src/match/breakdown.ts",
         "src/match/algol.ts",
    //     "src/match/inputFilter.ts",
-        "src/match/word.ts",
-        "src/utils/circularser.ts",
-        "src/utils/damerauLevenshtein.ts",
-        "src/utils/utils.ts"
+        "src/match/word.ts"
     ],
     "exclude": [
 //  "!node_modules/**"

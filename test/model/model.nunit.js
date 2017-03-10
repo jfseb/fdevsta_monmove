@@ -1,7 +1,7 @@
 /*! copyright gerd forstmann, all rights reserved */
 //var debug = require('debug')('appdata.nunit');
 var process = require('process');
-var root = (process.env.FSD_COVERAGE) ? '../../gen_cov' : '../../gen';
+var root = (process.env.FSD_COVERAGE) ? '../../gen_cov' : '../../js';
 
 var Model = require(root + '/model/model.js');
 var Meta = require(root + '/model/meta.js');
@@ -593,7 +593,7 @@ exports.testModelTest2 = function (test) {
   }
   fs.writeFileSync('logs/model.tools.json', JSON.stringify(u.tools, undefined,2));
   fs.writeFileSync('logs/model.mRules.json', JSON.stringify(u.mRules, undefined,2));
-  test.equal(true,true,"ok");
+  test.equal(true,true,'ok');
 /*
   var tools = Tools.getTools();
   fs.writeFileSync('logs/modelx.tools.json', JSON.stringify(tools,undefined,2));

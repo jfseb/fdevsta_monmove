@@ -4,7 +4,7 @@
  * @copyright (c) 2016 Gerd Forstmann
  */
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var debug = require("debug");
 var debuglog = debug('breakdown');
 function cleanseString(sString) {

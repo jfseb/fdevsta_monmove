@@ -20,7 +20,7 @@ var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
 
 /**
- * Directory containing generated sources which still contain
+ * Directory containing generated sources which still contains
  * JSDOC etc.
  */
 // var genDir = 'gen';
@@ -29,7 +29,7 @@ var testDir = 'test';
 
 gulp.task('watch', function () {
   gulp.watch([srcDir + '/**/*.js', testDir + '/**/*.js', srcDir + '/**/*.tsx',  srcDir + '/**/*.ts', 'gulpfile.js'],
-    ['tsc', 'babel', 'webpack','standard']);
+    ['tsc', 'babel','standard']);
 });
 
 /**

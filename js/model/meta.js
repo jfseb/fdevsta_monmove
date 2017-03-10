@@ -4,7 +4,7 @@
  * @file
  */
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 //import * as intf from 'constants';
 var debug = require("debug");
 var debuglog = debug('meta');

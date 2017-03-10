@@ -4,7 +4,7 @@
  * Constant determining the algorithm
  */
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 /**
  * Number of sentences which are not used
  */
@@ -16,7 +16,7 @@ exports.RANKING_EPSILON = 0.000000001;
  instead of 8, 1.5
 */
 exports.calcDist = {
-    lengthDelta1: 15,
+    lengthDelta1: 15
 };
 /**
  * levenshtein distances above this will not be considered valid

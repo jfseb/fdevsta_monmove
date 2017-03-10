@@ -14,7 +14,7 @@
  *
  */
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Category = {
     CAT_CATEGORY: "category",
     CAT_DOMAIN: "domain",

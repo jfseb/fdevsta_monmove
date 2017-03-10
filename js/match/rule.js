@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var IMatch = require("./ifmatch");
 var Model = require("../model/model");
 exports.oKeyOrder = ["systemObjectCategory", "systemId", "systemObjectId"];
@@ -201,7 +201,7 @@ function getRuleMap() {
                 type: 1 /* REGEXP */,
                 follows: {}
             }
-        ],
+        ]
     };
     var systemObjectId = UnitTestList.map(function (sEntry) {
         var sString = aregex.exec(sEntry)[1]; //.match('/([^/]*).qunit.html')[1]
@@ -219,7 +219,7 @@ function getRuleMap() {
         // wiki aliases, this is an old legacy foramt
         {
             key: 'Support page',
-            res: 'CA-UI2-INT-FE support',
+            res: 'CA-UI2-INT-FE support'
         },
         { key: 'FCC ABAP Alignment' },
         { key: 'UI2 test links' },
@@ -436,42 +436,42 @@ function getIntMRulesSample() {
             matchedString: "wiki",
             type: 0,
             bitindex: 0x01,
-            word: "wiki",
+            word: "wiki"
         },
         {
             category: "category",
             matchedString: "unit test",
             type: 0,
             bitindex: 0x01,
-            word: "unit test",
+            word: "unit test"
         },
         {
             category: "category",
             matchedString: "url",
             type: 0,
             bitindex: 0x01,
-            word: "url",
+            word: "url"
         },
         {
             category: "category",
             matchedString: "transaction",
             type: 0,
             bitindex: 0x01,
-            word: "transaction",
+            word: "transaction"
         },
         {
             category: "category",
             matchedString: "transaction",
             type: 0,
             bitindex: 0x01,
-            word: "ta",
+            word: "ta"
         },
         {
             category: "category",
             matchedString: "fiori catalog",
             type: 0,
             bitindex: 0x01,
-            word: "fiori catalog",
+            word: "fiori catalog"
         },
         {
             category: "category",
@@ -479,21 +479,21 @@ function getIntMRulesSample() {
             type: 0,
             _ranking: 0.8,
             bitindex: 0x01,
-            word: "catalog",
+            word: "catalog"
         },
         {
             category: "category",
             matchedString: "systemId",
             type: 0,
             bitindex: 0x01,
-            word: "system",
+            word: "system"
         },
         {
             category: "category",
             matchedString: "client",
             type: 0,
             bitindex: 0x01,
-            word: "client",
+            word: "client"
         },
         // tools of the sample model
         {
@@ -501,35 +501,35 @@ function getIntMRulesSample() {
             matchedString: "FLPD",
             type: 0,
             bitindex: 0x01,
-            word: "flpd",
+            word: "flpd"
         },
         {
             category: "operator",
             matchedString: "starts with",
             type: 0,
             bitindex: 0x01,
-            word: "starting with",
+            word: "starting with"
         },
         {
             category: "tool",
             matchedString: "FLP",
             type: 0,
             bitindex: 0x01,
-            word: "flp",
+            word: "flp"
         },
         {
             category: "tool",
             matchedString: "FLP",
             type: 0,
             bitindex: 0x01,
-            word: "Fiori Launchpad",
+            word: "Fiori Launchpad"
         },
         {
             category: "tool",
             matchedString: "wiki",
             type: 0,
             bitindex: 0x01,
-            word: "wiki",
+            word: "wiki"
         },
         // fillers
         // tools of the sample model

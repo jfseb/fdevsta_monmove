@@ -8,7 +8,7 @@
     "build": "gulp && tsc",
     "test": "gulp test",
     "instrument": "jscoverage js/ gen_cov/ --exclude *.map",
-    "testcov": "export FSD_COVERAGE=1 && nodeunit test/match test/exec test/model test/utils test/graph --reporter=lcov | coveralls"
+    "testcov": "export FSD_COVERAGE=1 && nodeunit test/model --reporter=lcov | coveralls"
   },
   "repository": {
     "type": "git",

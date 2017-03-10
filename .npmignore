@@ -9,6 +9,15 @@ test
 gen_tsc
 info.lcov
 logs
-gen3
 testmodel/*
 sensitive
+tsconfig.json
+tmp.json.zip
+README.md
+.eslintrc.json
+.npmignore
+.gitignore
+.travis.yml
+guplfile.js
+js_cov
+info.lcov

@@ -1,2 +1,3 @@
 # fdevsta_monmove
-move data to mongo db
+
+an npm modules containing model load code

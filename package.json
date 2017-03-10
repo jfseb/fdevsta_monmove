@@ -1,0 +1,38 @@
+{
+  "name": "fdevsta_monmove",
+  "version": "0.1.0",
+  "description": "model reading",
+  "main": "gen/index.js",
+  "typings": "gen/index",
+  "scripts": {
+    "build": "gulp",
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfseb/fdevsta_monmove.git"
+  },
+  "keywords": [
+    "typescript",
+    "fdevstart"
+  ],
+  "author": "jfsebpublic@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jfseb/fdevsta_monmove/issues"
+  },
+  "homepage": "https://github.com/jfseb/fdevsta_monmove#readme",
+  "devDependencies": {
+    "@types/core-js": "^0.9.35",
+    "@types/debug": "0.0.29",
+    "@types/node": "^7.0.5",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-env": "^0.4.0",
+    "gulp-eslint": "^3.0.1",
+    "gulp-jsdoc3": "^1.0.1",
+    "gulp-nodeunit": "^0.1.0",
+    "gulp-typescript": "^3.1.5",
+    "typescript": "^2.2.1"
+  }
+}

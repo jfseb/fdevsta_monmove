@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/jfseb/fdevsta_monmove#readme",
   "devDependencies": {
-    "@types/core-js": "^0.9.37",
     "@types/debug": "0.0.29",
     "@types/node": "^7.0.8",
     "babel-preset-es2015": "^6.22.0",

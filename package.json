@@ -5,9 +5,9 @@
   "main": "js/index.js",
   "typings": "js/index",
   "scripts": {
-    "build": "gulp && tsc",
+    "build": "gulp",
     "test": "gulp test",
-    "instrument": "jscoverage js/ gen_cov/ --exclude *.map",
+    "instrument": "jscoverage js/ gen_cov/ --exclude *.map,,*.d.ts",
     "testcov": "export FSD_COVERAGE=1 && nodeunit test/model --reporter=lcov | coveralls"
   },
   "repository": {

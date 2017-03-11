@@ -18,6 +18,6 @@ export interface Meta {
     Relation: (string) => IMeta;
 }
 export declare function getStringArray(arr: IMeta[]): string[];
-export declare const RELATION_hasCategory: string;
-export declare const RELATION_isCategoryOf: string;
+export declare const RELATION_hasCategory = "hasCategory";
+export declare const RELATION_isCategoryOf = "isCategoryOf";
 export declare function getMetaFactory(): Meta;

@@ -1,11 +1,12 @@
 node_modules
 docs
 logs
-js
+src
+test
+**/*.map
 testmodel
 testmodel2
-test
-.eslintrc.json
+
 gen_tsc
 info.lcov
 logs
@@ -19,5 +20,7 @@ README.md
 .gitignore
 .travis.yml
 guplfile.js
+**/*.map
+*.bak
 js_cov
 info.lcov

@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 import * as IMatch from '../match/ifmatch';
 import * as Meta from './meta';
 export declare function cmpTools(a: IMatch.ITool, b: IMatch.ITool): number;

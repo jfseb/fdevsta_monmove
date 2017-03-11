@@ -4,7 +4,7 @@
  * Constant determining the algorithm
  */
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Number of sentences which are not used
  */
@@ -16,7 +16,7 @@ exports.RANKING_EPSILON = 0.000000001;
  instead of 8, 1.5
 */
 exports.calcDist = {
-    lengthDelta1: 15
+    lengthDelta1: 15,
 };
 /**
  * levenshtein distances above this will not be considered valid
@@ -42,5 +42,4 @@ exports.aReinforceDistWeight = [0.1, 0.1, 0.05, 0.02];
 exports.Top_N_WordCategorizations = 5;
 exports.DescribeValueListMinCountValueList = 3;
 exports.DescribeValueListLengthCharLimit = 60;
-
-//# sourceMappingURL=algol.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWxnb2wuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvbWF0Y2gvYWxnb2wudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7Ozs7R0FJRzs7O0FBR0g7O0dBRUc7QUFDVSxRQUFBLGdCQUFnQixHQUFHLEdBQUcsQ0FBQztBQUl2QixRQUFBLGVBQWUsR0FBRyxXQUFXLENBQUM7QUFFM0M7Ozs7RUFJRTtBQUVXLFFBQUEsUUFBUSxHQUFJO0lBQ3ZCLFlBQVksRUFBRyxFQUFFO0NBQ2xCLENBQUE7QUFDRDs7R0FFRztBQUNVLFFBQUEsa0JBQWtCLEdBQVksR0FBRyxDQUFDO0FBRWxDLFFBQUEsZ0JBQWdCLEdBQUcsS0FBSyxDQUFDLENBQUEsZ0JBQWdCO0FBRXpDLFFBQUEsc0JBQXNCLEdBQUcsSUFBSSxDQUFDO0FBRTNDOzs7OztHQUtHO0FBQ1UsUUFBQSx3QkFBd0IsR0FBWSxDQUFDLENBQUM7QUFFbkQ7OztHQUdHO0FBQ1UsUUFBQSxvQkFBb0IsR0FBa0IsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUksRUFBRSxJQUFJLENBQUMsQ0FBQztBQUUxRTs7R0FFRztBQUNVLFFBQUEseUJBQXlCLEdBQUcsQ0FBQyxDQUFDO0FBSTlCLFFBQUEsa0NBQWtDLEdBQUcsQ0FBQyxDQUFDO0FBQ3ZDLFFBQUEsZ0NBQWdDLEdBQUcsRUFBRSxDQUFDIn0=

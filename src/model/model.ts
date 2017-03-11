@@ -460,7 +460,7 @@ export function findNextLen(targetLen: number, arr: string[], offsets: number[])
 
 export function addRangeRulesUnlessPresent(rules: IMatch.mRule[], lcword: string, rangeRules: IMatch.mRule[], presentRulesForKey: IMatch.mRule[], seenRules) {
     rangeRules.forEach(rangeRule => {
-        var newRule = Object.assign({}, rangeRule);
+        var newRule = (Object as any).assign({}, rangeRule);
         newRule.lowercaseword = lcword;
         newRule.word = lcword;
         //if((lcword === 'services' || lcword === 'service') && newRule.range.rule.lowercaseword.indexOf('odata')>=0) {

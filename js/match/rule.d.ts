@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 import * as IMatch from './ifmatch';
 export declare const oKeyOrder: Array<String>;
 export declare function getRuleMap(): {

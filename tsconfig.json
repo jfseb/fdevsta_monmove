@@ -34,7 +34,7 @@
         "src/model/model.ts",
         "src/model/meta.ts",
         "src/match/breakdown.ts",
-        "src/match/algol.ts",
+        "src/match/algol.ts"
    //     "src/match/inputFilter.ts",
    //     "src/match/word.ts"
     ],

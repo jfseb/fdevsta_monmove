@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 import * as IMatch from './ifmatch';
 export declare function cleanseString(sString: string): string;
 export declare function cleanseStringLeaveDots(sString: string): string;

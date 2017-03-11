@@ -1,14 +1,13 @@
-/// <reference types="core-js" />
 export declare const enum EnumResponseCode {
     NOMATCH = 0,
     EXEC = 1,
     QUERY = 2,
 }
-export declare const CAT_CATEGORY: string;
-export declare const CAT_FILLER: string;
-export declare const CAT_TOOL: string;
-export declare const ERR_NO_KNOWN_WORD: string;
-export declare const ERR_EMPTY_INPUT: string;
+export declare const CAT_CATEGORY = "category";
+export declare const CAT_FILLER = "filler";
+export declare const CAT_TOOL = "tool";
+export declare const ERR_NO_KNOWN_WORD = "NO_KNOWN_WORD";
+export declare const ERR_EMPTY_INPUT = "EMPTY_INPUT";
 export interface IERError {
     err_code: string;
     text: string;

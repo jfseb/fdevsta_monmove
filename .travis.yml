@@ -9,5 +9,6 @@ node_js:
 # - "4"   does not support sourcemaps
 after_script:
   - npm run instrument
+  - npm run testcov2
   - npm run testcov
 

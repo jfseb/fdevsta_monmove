@@ -1,6 +1,6 @@
 {
   "name": "fdevsta_monmove",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "model reading",
   "main": "js/index.js",
   "typings": "js/index",

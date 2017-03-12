@@ -12,11 +12,18 @@ var fs = require('fs');
  * clear a cache for the defaut mode for coverage
  */
 try {
-  fs.unlinkSync('./testmodel/_cachefalse.js.zip');
-  fs.unlinkSync('./testmodel/_cachetrue.js.zip');
+  fs.unlinkSync('./node_modules/abot_testmodel/testmodel/_cachefalse.js.zip');
 } catch (e) {
   // empty
 }
+
+try {
+  fs.unlinkSync('./testmodel/_cachetrue.js.zip');
+
+} catch (e) {
+  // empty
+}
+
 
 
 var theModel = Model.loadModels();

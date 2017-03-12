@@ -71,7 +71,7 @@ export declare type IMatchedSetRecords = IMatchedSetRecord[];
 export declare type IMatchSet = {
     [key: string]: string;
 };
-export declare const enum EnumRuleType {
+export declare enum EnumRuleType {
     WORD = 0,
     REGEXP = 1,
 }

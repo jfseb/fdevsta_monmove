@@ -94,7 +94,7 @@ export type IMatchedSetRecords = IMatchedSetRecord[];
  */
 export type IMatchSet = { [key : string] : string};
 
-export const  enum EnumRuleType {
+export /*const*/  enum EnumRuleType {
   WORD,
   REGEXP
 }

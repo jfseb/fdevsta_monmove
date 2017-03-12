@@ -74,7 +74,7 @@ function cmpMRule(a, b) {
 exports.cmpMRule = cmpMRule;
 function assureLowerCaseWord(mRules) {
     return mRules.map(function (oRule) {
-        if (oRule.type === 0 /* WORD */) {
+        if (oRule.type === IMatch.EnumRuleType.WORD) {
             oRule.lowercaseword = oRule.word.toLowerCase();
         }
         return oRule;

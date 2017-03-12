@@ -22,7 +22,7 @@ var _ = require("lodash");
 /**
  * the model path, may be controlled via environment variable
  */
-var envModelPath = process.env["ABOT_MODELPATH"] || "testmodel";
+var envModelPath = process.env["ABOT_MODELPATH"] || "node_modules/abot_testmodel/testmodel";
 function cmpTools(a, b) {
     return a.name.localeCompare(b.name);
 }
@@ -33,7 +33,7 @@ function addSynonyms(synonyms, category, synonymFor, bitindex, mRules, seen) {
         var oRule = {
             category: category,
             matchedString: synonymFor,
-            type: 0 /* WORD */,
+            type: IMatch.EnumRuleType.WORD,
             word: syn,
             bitindex: bitindex,
             _ranking: 0.95
@@ -56,7 +56,7 @@ function addBestSplit(mRules, rule, seenRules) {
     //if(!global_AddSplits) {
     //    return;
     //}
-    if (rule.type !== 0 /* WORD */) {
+    if (rule.type !== IMatch.EnumRuleType.WORD) {
         return;
     }
     var best = Breakdown.makeMatchPattern(rule.lowercaseword);
@@ -83,7 +83,7 @@ function addBestSplit(mRules, rule, seenRules) {
 }
 exports.addBestSplit = addBestSplit;
 function insertRuleIfNotPresent(mRules, rule, seenRules) {
-    if (rule.type !== 0 /* WORD */) {
+    if (rule.type !== IMatch.EnumRuleType.WORD) {
         mRules.push(rule);
         return;
     }
@@ -161,7 +161,7 @@ function loadModelData(modelPath, oMdl, sModelName, oModel) {
                 var oRule = {
                     category: category,
                     matchedString: sString,
-                    type: 0 /* WORD */,
+                    type: IMatch.EnumRuleType.WORD,
                     word: sString,
                     bitindex: bitindex,
                     _ranking: 0.95
@@ -220,7 +220,7 @@ function mergeModelJson(sModelName, oMdl, oModel) {
         insertRuleIfNotPresent(oModel.mRules, {
             category: "category",
             matchedString: category,
-            type: 0 /* WORD */,
+            type: IMatch.EnumRuleType.WORD,
             word: category,
             lowercaseword: category.toLowerCase(),
             bitindex: oMdl.bitindex,
@@ -281,7 +281,7 @@ function mergeModelJson(sModelName, oMdl, oModel) {
     insertRuleIfNotPresent(oModel.mRules, {
         category: "domain",
         matchedString: oMdl.domain,
-        type: 0 /* WORD */,
+        type: IMatch.EnumRuleType.WORD,
         word: oMdl.domain,
         bitindex: oMdl.bitindex,
         _ranking: 0.95
@@ -325,7 +325,7 @@ function mergeModelJson(sModelName, oMdl, oModel) {
         insertRuleIfNotPresent(oModel.mRules, {
             category: "tool",
             matchedString: oMdl.tool.name,
-            type: 0 /* WORD */,
+            type: IMatch.EnumRuleType.WORD,
             word: oMdl.tool.name,
             bitindex: oMdl.bitindex,
             _ranking: 0.95
@@ -360,7 +360,7 @@ function splitRules(rules) {
     var res = {};
     var nonWordRules = [];
     rules.forEach(function (rule) {
-        if (rule.type === 0 /* WORD */) {
+        if (rule.type === IMatch.EnumRuleType.WORD) {
             if (!rule.lowercaseword) {
                 throw new Error("Rule has no member lowercaseword" + JSON.stringify(rule));
             }
@@ -421,7 +421,7 @@ function addCloseExactRangeRules(rules, seenRules) {
     var keysMap = {};
     var rangeKeysMap = {};
     rules.forEach(function (rule) {
-        if (rule.type === 0 /* WORD */) {
+        if (rule.type === IMatch.EnumRuleType.WORD) {
             //keysMap[rule.lowercaseword] = 1;
             keysMap[rule.lowercaseword] = keysMap[rule.lowercaseword] || [];
             keysMap[rule.lowercaseword].push(rule);
@@ -556,7 +556,7 @@ function loadModels(modelPath) {
     insertRuleIfNotPresent(oModel.mRules, {
         category: "meta",
         matchedString: "domain",
-        type: 0 /* WORD */,
+        type: IMatch.EnumRuleType.WORD,
         word: "domain",
         bitindex: metaBitIndex,
         _ranking: 0.95
@@ -567,7 +567,7 @@ function loadModels(modelPath) {
     var re = "^((" + fillers.join(")|(") + "))$";
     oModel.mRules.push({
         category: "filler",
-        type: 1 /* REGEXP */,
+        type: IMatch.EnumRuleType.REGEXP,
         regexp: new RegExp(re, "i"),
         matchedString: "filler",
         bitindex: fillerBitIndex,
@@ -589,7 +589,7 @@ function loadModels(modelPath) {
             category: "operator",
             word: word.toLowerCase(),
             lowercaseword: word.toLowerCase(),
-            type: 0 /* WORD */,
+            type: IMatch.EnumRuleType.WORD,
             matchedString: word,
             bitindex: operatorBitIndex,
             _ranking: 0.9
@@ -601,7 +601,7 @@ function loadModels(modelPath) {
                     category: "operator",
                     word: synonym.toLowerCase(),
                     lowercaseword: synonym.toLowerCase(),
-                    type: 0 /* WORD */,
+                    type: IMatch.EnumRuleType.WORD,
                     matchedString: operator,
                     bitindex: operatorBitIndex,
                     _ranking: 0.9

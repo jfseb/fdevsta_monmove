@@ -24,29 +24,13 @@ import * as _ from 'lodash';
 /**
  * the model path, may be controlled via environment variable
  */
-var envModelPath = process.env["ABOT_MODELPATH"] || "testmodel";
+var envModelPath = process.env["ABOT_MODELPATH"] || "node_modules/abot_testmodel/testmodel";
 
 
 export function cmpTools(a: IMatch.ITool, b: IMatch.ITool) {
   return a.name.localeCompare(b.name);
 }
 
-
-//export interface IModels = Match.IModels;
-
-/*
-export interface IModels {
-    domains: string[],
-    tools: IMatch.ITool[],
-    category: string[],
-    mRules: IMatch.mRule[],
-    records: any[]
-    seenRules?: { [key: string]: IMatch.mRule },
-    meta : {
-        // entity -> relation -> target
-        t3 : { [key: string] : { [key : string] : any }}
-    }
-}*/
 
 type IModel = IMatch.IModel;
 

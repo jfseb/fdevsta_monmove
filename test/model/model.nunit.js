@@ -357,6 +357,8 @@ exports.testAddSplit = function(test) {
     word: 'Alpha Centauri A',
     lowercaseword: 'alpha centauri a',
     bitindex : 0x20,
+    wordType : 'F',
+    bitSentenceAnd : 0x20,
     _ranking: 0.95
   };
 
@@ -370,6 +372,8 @@ exports.testAddSplit = function(test) {
     word: 'centauri',
     type: 0,
     lowercaseword: 'centauri',
+    bitSentenceAnd : 32,
+    wordType : 'F',
     _ranking : 0.95,
     range:
     { low: -1,
@@ -492,6 +496,14 @@ exports.testgetDomainsForCategoryBadCategory = function (test) {
 };
 
 
+exports.testgetAllDomainsBintIndex = function (test) {
+  var u = Model.loadModels();
+  var res = Model.getAllDomainsBitIndex(u);
+  test.equal(res, 0x00FFF);
+  test.done();
+};
+
+
 exports.testgetCategoriesForDomain = function (test) {
   test.expect(1);
   var u = Model.loadModels();
@@ -528,7 +540,7 @@ exports.testModelCheckExactOnly = function (test) {
   var res = u.mRules.filter(function(oRule) {
     return oRule.exactOnly === true;
   });
-  test.equal(res.length, 431 , 'correct flag applied');
+  test.equal(res.length, 449 /*431*/ , 'correct flag applied');
   test.done();
 };
 
@@ -584,6 +596,39 @@ exports.testCategorySorting = function (test) {
 
   var res = Model.sortCategoriesByImportance(map, ['j', 'e', 'f', 'b', 'c', 'd', 'a', 'b', 'h']);
   test.deepEqual( res, ['a', 'b', 'b', 'c', 'd', 'f', 'e', 'h', 'j']);
+  test.done();
+};
+
+
+exports.testWordCategorizationFactCat = function (test) {
+  var earth = theModel.rules.wordMap['earth'];
+  //console.log(earth);
+  test.deepEqual(earth, {
+    bitindex: 192,
+    rules:
+    [{
+      category: 'element name',
+      matchedString: 'earth',
+      type: 0,
+      word: 'earth',
+      bitindex: 64,
+      bitSentenceAnd: 64,
+      wordType: 'F',
+      _ranking: 0.95,
+      lowercaseword: 'earth'
+    },
+    {
+      category: 'object name',
+      matchedString: 'earth',
+      type: 0,
+      word: 'earth',
+      bitindex: 128,
+      bitSentenceAnd: 128,
+      wordType: 'F',
+      _ranking: 0.95,
+      lowercaseword: 'earth'
+    }]
+  });
   test.done();
 };
 
@@ -695,4 +740,18 @@ exports.testModelHasDomains = function (test) {
       'wiki' ] , 'correct data read');
   test.done();
 
+};
+
+
+/**
+ * Unit test for sth
+ */
+exports.testModelAppConfigForEveryDomain = function (test) {
+  test.expect(1);
+  var u = Model.loadModels();
+  var res = u.mRules.filter(function(oRule) {
+    return oRule.lowercaseword === 'applicationcomponent' && oRule.matchedString === 'ApplicationComponent';
+  });
+  test.equal(res.length,2/*431*/ , 'correct number');
+  test.done();
 };

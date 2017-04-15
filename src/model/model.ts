@@ -36,7 +36,9 @@ type IModel = IMatch.IModel;
 
 const ARR_MODEL_PROPERTIES = ["domain", "bitindex", "defaultkeycolumn", "defaulturi", "categoryDescribed", "columns", "description", "tool", "toolhidden", "synonyms", "category", "wordindex", "exactmatch", "hidden"];
 
-function addSynonyms(synonyms: string[], category: string, synonymFor: string, bitindex: number, mRules: Array<IMatch.mRule>, seen: { [key: string]: IMatch.mRule[] }) {
+function addSynonyms(synonyms: string[], category: string, synonymFor: string, bitindex: number, bitSentenceAnd,
+    wordType: string,
+    mRules: Array<IMatch.mRule>, seen: { [key: string]: IMatch.mRule[] }) {
     synonyms.forEach(function (syn) {
         var oRule = {
             category: category,
@@ -44,6 +46,8 @@ function addSynonyms(synonyms: string[], category: string, synonymFor: string, b
             type: IMatch.EnumRuleType.WORD,
             word: syn,
             bitindex: bitindex,
+            bitSentenceAnd : bitSentenceAnd,
+            wordType : wordType,
             _ranking: 0.95
         };
         debuglog(debuglog.enabled ? ("inserting synonym" + JSON.stringify(oRule)) : '-');
@@ -52,7 +56,7 @@ function addSynonyms(synonyms: string[], category: string, synonymFor: string, b
 }
 
 function getRuleKey(rule) {
-    var r1 = rule.matchedString + "-|-" + rule.category + " -|- " + rule.type + " -|- " + rule.word + " ";
+    var r1 = rule.matchedString + "-|-" + rule.category + " -|- " + rule.type + " -|- " + rule.word + " " + rule.bitindex + " " + rule.wordType;
     if (rule.range) {
         var r2 = getRuleKey(rule.range.rule);
         r1 += " -|- " + rule.range.low + "/" + rule.range.high + " -|- " + r2;
@@ -80,6 +84,8 @@ export function addBestSplit(mRules: Array<IMatch.mRule>, rule: IMatch.mRule, se
         category: rule.category,
         matchedString: rule.matchedString,
         bitindex: rule.bitindex,
+        bitSentenceAnd : rule.bitindex,
+        wordType : rule.wordType,
         word: best.longestToken,
         type: 0,
         lowercaseword: best.longestToken,
@@ -182,6 +188,8 @@ function loadModelData(modelPath: string, oMdl: IModel, sModelName: string, oMod
                     type: IMatch.EnumRuleType.WORD,
                     word: sString,
                     bitindex: bitindex,
+                    bitSentenceAnd : bitindex,
+                    wordType : IMatch.WORDTYPE.FACT,
                     _ranking: 0.95
                 } as IMatch.mRule;
                 if (oMdl.exactmatch && oMdl.exactmatch.indexOf(category) >= 0) {
@@ -189,10 +197,12 @@ function loadModelData(modelPath: string, oMdl: IModel, sModelName: string, oMod
                 }
                 insertRuleIfNotPresent(oModel.mRules, oRule, oModel.seenRules);
                 if (oMdlData.synonyms && oMdlData.synonyms[category]) {
-                    addSynonyms(oMdlData.synonyms[category], category, sString, bitindex, oModel.mRules, oModel.seenRules);
+                    throw new Error("how can this happen?");
+                    //addSynonyms(oMdlData.synonyms[category], category, sString, bitindex, bitindex, "X", oModel.mRules, oModel.seenRules);
                 }
+                // a synonym for a FACT
                 if (oEntry.synonyms && oEntry.synonyms[category]) {
-                    addSynonyms(oEntry.synonyms[category], category, sString, bitindex, oModel.mRules, oModel.seenRules);
+                    addSynonyms(oEntry.synonyms[category], category, sString, bitindex, bitindex, IMatch.WORDTYPE.FACT, oModel.mRules, oModel.seenRules);
                 }
             }
         });
@@ -207,6 +217,16 @@ function loadModel(modelPath: string, sModelName: string, oModel: IMatch.IModels
     var oMdl = readFileAsJSON('./' + modelPath + '/' + sModelName + ".model.json") as IModel;
     mergeModelJson(sModelName, oMdl, oModel);
     loadModelData(modelPath, oMdl, sModelName, oModel);
+}
+
+export function getAllDomainsBitIndex(oModel : IMatch.IModels): number {
+    var len = oModel.domains.length;
+    var res = 0;
+    for(var i = 0; i < len; ++i) {
+        res = res << 1;
+        res = res | 0x0001;
+    }
+    return res;
 }
 
 export function getDomainBitIndex(domain: string, oModel: IMatch.IModels): number {
@@ -248,6 +268,8 @@ function mergeModelJson(sModelName: string, oMdl: IModel, oModel: IMatch.IModels
             word: category,
             lowercaseword: category.toLowerCase(),
             bitindex: oMdl.bitindex,
+            wordType : IMatch.WORDTYPE.CATEGORY,
+            bitSentenceAnd : oMdl.bitindex,
             _ranking: 0.95
         }, oModel.seenRules);
     });
@@ -319,6 +341,8 @@ function mergeModelJson(sModelName: string, oMdl: IModel, oModel: IMatch.IModels
         type: IMatch.EnumRuleType.WORD,
         word: oMdl.domain,
         bitindex: oMdl.bitindex,
+        bitSentenceAnd : oMdl.bitindex,
+        wordType : "D",
         _ranking: 0.95
     }, oModel.seenRules);
 
@@ -364,11 +388,14 @@ function mergeModelJson(sModelName: string, oMdl: IModel, oModel: IMatch.IModels
             type: IMatch.EnumRuleType.WORD,
             word: oMdl.tool.name,
             bitindex: oMdl.bitindex,
+            bitSentenceAnd : oMdl.bitindex,
+            wordType : IMatch.WORDTYPE.TOOL,
             _ranking: 0.95
         }, oModel.seenRules);
     };
     if (oMdl.synonyms && oMdl.synonyms["tool"]) {
-        addSynonyms(oMdl.synonyms["tool"], "tool", oMdl.tool.name, oMdl.bitindex, oModel.mRules, oModel.seenRules);
+        addSynonyms(oMdl.synonyms["tool"], "tool", oMdl.tool.name, oMdl.bitindex,
+        oMdl.bitindex, IMatch.WORDTYPE.TOOL, oModel.mRules, oModel.seenRules);
     };
     if (oMdl.synonyms) {
         Object.keys(oMdl.synonyms).forEach(function (ssynkey) {
@@ -376,8 +403,8 @@ function mergeModelJson(sModelName: string, oMdl: IModel, oModel: IMatch.IModels
                 if (oModel.full.domain[oMdl.domain].categories[ssynkey]) {
                     oModel.full.domain[oMdl.domain].categories[ssynkey].synonyms = oMdl.synonyms[ssynkey];
                 }
-
-                addSynonyms(oMdl.synonyms[ssynkey], "category", ssynkey, oMdl.bitindex, oModel.mRules, oModel.seenRules);
+                addSynonyms(oMdl.synonyms[ssynkey], "category", ssynkey, oMdl.bitindex, oMdl.bitindex,
+                IMatch.WORDTYPE.CATEGORY, oModel.mRules, oModel.seenRules);
             }
         });
     }
@@ -596,6 +623,7 @@ export function loadModels(modelPath?: string): IMatch.IModels {
     */
 
     var metaBitIndex = getDomainBitIndex('meta', oModel);
+    var bitIndexAllDomains = getAllDomainsBitIndex(oModel);
 
     // add the domain meta rule
     insertRuleIfNotPresent(oModel.mRules, {
@@ -604,6 +632,8 @@ export function loadModels(modelPath?: string): IMatch.IModels {
         type: IMatch.EnumRuleType.WORD,
         word: "domain",
         bitindex: metaBitIndex,
+        wordType : IMatch.WORDTYPE.META,
+        bitSentenceAnd : bitIndexAllDomains,
         _ranking: 0.95
     }, oModel.seenRules);
 
@@ -611,6 +641,7 @@ export function loadModels(modelPath?: string): IMatch.IModels {
     var fillerBitIndex = getDomainBitIndex('meta', oModel);
     //add a filler rule
     var fillers =  readFileAsJSON('./' + modelPath + '/filler.json');
+    /*
     var re = "^((" + fillers.join(")|(") + "))$";
     oModel.mRules.push({
         category: "filler",
@@ -620,9 +651,25 @@ export function loadModels(modelPath?: string): IMatch.IModels {
         bitindex: fillerBitIndex,
         _ranking: 0.9
     });
+    */
+
+    fillers.forEach(filler=> {
+        insertRuleIfNotPresent(oModel.mRules, {
+            category: "filler",
+            type: IMatch.EnumRuleType.WORD,
+            word: filler,
+            lowercaseword : filler.toLowerCase(),
+            matchedString: filler, //"filler",
+            exactOnly : true,
+            bitindex: fillerBitIndex,
+            bitSentenceAnd : bitIndexAllDomains,
+            wordType: IMatch.WORDTYPE.FILLER,
+            _ranking: 0.9
+        }, oModel.seenRules);
+    });
 
     //add operators
-    var operators = readFileAsJSON('./resources/model/operators.json');
+    var operators = readFileAsJSON('./' + modelPath + '/operators.json');
     var operatorBitIndex = getDomainBitIndex('operators', oModel);
     Object.keys(operators.operators).forEach(function (operator) {
         if (IMatch.aOperatorNames.indexOf(operator) < 0) {
@@ -640,6 +687,8 @@ export function loadModels(modelPath?: string): IMatch.IModels {
             type: IMatch.EnumRuleType.WORD,
             matchedString: word,
             bitindex: operatorBitIndex,
+            bitSentenceAnd : bitIndexAllDomains,
+            wordType : IMatch.WORDTYPE.OPERATOR,
             _ranking: 0.9
         }, oModel.seenRules);
         // add all synonyms
@@ -652,6 +701,8 @@ export function loadModels(modelPath?: string): IMatch.IModels {
                     type: IMatch.EnumRuleType.WORD,
                     matchedString: operator,
                     bitindex: operatorBitIndex,
+                    bitSentenceAnd : bitIndexAllDomains,
+                    wordType: IMatch.WORDTYPE.OPERATOR,
                     _ranking: 0.9
                 }, oModel.seenRules);
             });

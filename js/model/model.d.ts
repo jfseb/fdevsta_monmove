@@ -4,6 +4,7 @@ export declare function cmpTools(a: IMatch.ITool, b: IMatch.ITool): number;
 export declare function addBestSplit(mRules: Array<IMatch.mRule>, rule: IMatch.mRule, seenRules: {
     [key: string]: IMatch.mRule[];
 }): void;
+export declare function getAllDomainsBitIndex(oModel: IMatch.IModels): number;
 export declare function getDomainBitIndex(domain: string, oModel: IMatch.IModels): number;
 export declare function splitRules(rules: IMatch.mRule[]): IMatch.SplitRules;
 export declare function findNextLen(targetLen: number, arr: string[], offsets: number[]): void;

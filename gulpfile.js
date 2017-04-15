@@ -190,6 +190,27 @@ gulp.task('standard', () => {
     .pipe(eslint.failAfterError());
 });
 
+const gulpRun = require('gulp-run');
+
+gulp.task('pack', () => {
+  return gulpRun('npm pack').exec().pipe(gulp.dest('outpu'));
+});
+
+gulp.task('packhome1', ['pack'] , () => {
+  return gulpRun('cd ..\\fdevstart && npm i ..\\fdevsta_monmove\\fdevsta_monmove-0.1.13.tgz').exec()
+  .pipe(gulp.dest('outpu_packhome1'));
+});
+
+gulp.task('packhome2', ['pack'] , () => {
+  return gulpRun('cd ..\\erbase_bitmap && npm i ..\\fdevsta_monmove\\fdevsta_monmove-0.1.13.tgz').exec()
+  .pipe(gulp.dest('outpu_packhome2'));
+});
+gulp.task('packhome', ['packhome1' , 'packhome2' ]);
+
+
+gulp.task('default', ['tsc', 'standard', 'test', 'doc' ]);
+
+
 // Default Task
 gulp.task('default', ['tsc', 'standard', 'test', 'doc' ]);
 gulp.task('build', ['tsc', 'standard']);

@@ -15,6 +15,15 @@ exports.ERR_EMPTY_INPUT = "EMPTY_INPUT";
 ;
 exports.aOperatorNames = ["starting with", "ending with", "containing", "excluding", "having", "being"];
 ;
+exports.WORDTYPE = {
+    FILLER: "I",
+    FACT: "F",
+    TOOL: "T",
+    META: "M",
+    CATEGORY: "C",
+    DOMAIN: "D",
+    OPERATOR: "O" // containing ,starting with
+};
 var EnumRuleType;
 (function (EnumRuleType) {
     EnumRuleType[EnumRuleType["WORD"] = 0] = "WORD";

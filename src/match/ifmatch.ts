@@ -94,6 +94,16 @@ export type IMatchedSetRecords = IMatchedSetRecord[];
  */
 export type IMatchSet = { [key : string] : string};
 
+export const WORDTYPE = {
+  FILLER : "I", // in, and,
+  FACT : "F",  // a model fact
+  TOOL: "T", // a tool name
+  META : "M",  // words like category, domain
+  CATEGORY : "C", // a category, e.g. BSPName
+  DOMAIN : "D", // a domain, e.g. Fiori Bom
+  OPERATOR : "O" // containing ,starting with
+};
+
 export /*const*/  enum EnumRuleType {
   WORD,
   REGEXP
@@ -193,8 +203,12 @@ export interface mRule {
   matchedString?: string,
   matchIndex?: number,
   category: string,
-  bitindex : number,
   range? :  IWordRange,
+  /* categorization */
+  wordType: string, // one of WORDTYPE
+  bitindex : number, // bitindex indicating domain
+  bitSentenceAnd : number, // a bitindex flaglist which has to be nonzero on and
+
   /**
    * only use an exact match
    */

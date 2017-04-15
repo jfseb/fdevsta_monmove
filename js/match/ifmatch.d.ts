@@ -71,6 +71,15 @@ export declare type IMatchedSetRecords = IMatchedSetRecord[];
 export declare type IMatchSet = {
     [key: string]: string;
 };
+export declare const WORDTYPE: {
+    FILLER: string;
+    FACT: string;
+    TOOL: string;
+    META: string;
+    CATEGORY: string;
+    DOMAIN: string;
+    OPERATOR: string;
+};
 export declare enum EnumRuleType {
     WORD = 0,
     REGEXP = 1,
@@ -172,8 +181,10 @@ export interface mRule {
     matchedString?: string;
     matchIndex?: number;
     category: string;
-    bitindex: number;
     range?: IWordRange;
+    wordType: string;
+    bitindex: number;
+    bitSentenceAnd: number;
     /**
      * only use an exact match
      */
